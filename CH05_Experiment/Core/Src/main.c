@@ -47,6 +47,7 @@ RNG_HandleTypeDef hrng;
 
 /* USER CODE BEGIN PV */
 
+volatile uint8_t timerDone;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -71,6 +72,8 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+
+  __disable_irq();
 
   /* USER CODE END 1 */
 

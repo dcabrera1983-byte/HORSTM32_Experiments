@@ -32,6 +32,9 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+extern volatile uint8_t timerDone;
+extern RNG_HandleTypeDef hrng;
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
