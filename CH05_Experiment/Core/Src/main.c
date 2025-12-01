@@ -22,6 +22,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "../../Application/inc/app.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,6 +97,8 @@ int main(void)
   MX_GPIO_Init();
   MX_RNG_Init();
   /* USER CODE BEGIN 2 */
+
+  app_main();
 
   /* USER CODE END 2 */
 
