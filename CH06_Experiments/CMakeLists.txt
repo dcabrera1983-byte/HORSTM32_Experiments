@@ -56,6 +56,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Middlewares/Third_Party/SEGGER/SystemView/FreeRTOSV10/SEGGER_SYSVIEW_FreeRTOS.c
     Middlewares/Third_Party/SEGGER/SystemView/SYSVIEW/SEGGER_SYSVIEW.c
     Middlewares/Application/src/app.c
+    Middlewares/Application/src/board_controller.c
+    Middlewares/Application/src/lookBusy.c
 )
 
 # Add include paths
@@ -68,6 +70,16 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     Middlewares/Third_Party/SEGGER/SystemView/SEGGER
     Middlewares/Third_Party/SEGGER/SystemView/SYSVIEW
     Middlewares/Application/inc
+)
+
+# Add for FreeRTOS
+target_include_directories(FreeRTOS PRIVATE
+    Middlewares/Third_Party/SEGGER/RTT/Config
+    Middlewares/Third_Party/SEGGER/RTT/RTT
+    Middlewares/Third_Party/SEGGER/SystemView/Config
+    Middlewares/Third_Party/SEGGER/SystemView/FreeRTOSV10
+    Middlewares/Third_Party/SEGGER/SystemView/SEGGER
+    Middlewares/Third_Party/SEGGER/SystemView/SYSVIEW
 )
 
 # Add project symbols (macros)

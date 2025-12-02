@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "../../Third_Party/SEGGER/SystemView/SYSVIEW/SEGGER_SYSVIEW.h"
 #include "../../Middlewares/Application/inc/app.h"
 
 /* USER CODE END Includes */
@@ -90,7 +91,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -103,8 +104,6 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
-  APP_Init();
 
   /* USER CODE END 2 */
 
