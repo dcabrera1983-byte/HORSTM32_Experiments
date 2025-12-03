@@ -13,11 +13,12 @@ void Task1(void *arg);
 void Task2(void *arg);
 void Task3(void *arg);
 
-uint32_t iterationsPerMs;
+extern uint32_t iterationsPerMs;
 
 void APP_Init(void){
 
-    iterationsPerMs = lookBusyIterationRate();
+    // iterationsPerMS, needs to be collected outside of this initialize because freertos kernel initialization masks
+    // the TIM7 and will cause the function to hang.
 
     SEGGER_SYSVIEW_Conf();
 
@@ -48,11 +49,14 @@ void Task1(void *arg){
     lookBusyIterations = iterationsPerMs /4;
 
     while(1){
-        SEGGER_SYSVIEW_PrintfHost("TASK1: Iteration %d\n", iterations++);
-
+        if ((iterations % 100) == 1)
+        { 
+            SEGGER_SYSVIEW_PrintfHost("TASK1: Iteration %u\n", iterations);
+        }
         lookBusy(lookBusyIterations);
 
         vTaskDelay(5);
+        iterations++;
     }
 }
 
@@ -64,9 +68,13 @@ void Task2(void *arg){
     SEGGER_SYSVIEW_PrintfHost("TASK2: Starting!\n");
     lookBusyIterations = iterationsPerMs / 2;
     while(1){
-        SEGGER_SYSVIEW_PrintfHost("TASK2: Iteration %d\n", iterations++);
+        if ((iterations % 100) == 1)
+        { 
+            SEGGER_SYSVIEW_PrintfHost("TASK2: Iteration %u\n", iterations);
+        }
         lookBusy(lookBusyIterations);
         vTaskDelay(1);
+        iterations++;
     }
 }
 
@@ -80,8 +88,11 @@ void Task3(void *arg){
     lookBusyIterations = iterationsPerMs * 2;
 
     while(1){
-        SEGGER_SYSVIEW_PrintfHost("TASK3: Iteration %d\n", iterations++);
+        if ((iterations % 100) == 1)
+        { 
+            SEGGER_SYSVIEW_PrintfHost("TASK3: Iteration %u\n", iterations);
+        }
         lookBusy(lookBusyIterations);
-        vTaskDelay(5000/portTICK_PERIOD_MS);
+        iterations++;
     }
 }

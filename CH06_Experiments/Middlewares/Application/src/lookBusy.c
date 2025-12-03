@@ -93,9 +93,9 @@ uint32_t lookBusyIterationRate( void )
 
   // Ensure no ISRs are run while lookBusy() is running
   // HAL_Delay(1) is used to avoid HAL's time-base interrupt from occurring while lookBusy() runs.
-  
+
   // TODO: Disabling this HAL delay currently gets stuck at this delay for some reason. Need to figure out. 
-  //HAL_Delay(1);
+  HAL_Delay(1);
 
   // Disable interrupts
   __disable_irq();
