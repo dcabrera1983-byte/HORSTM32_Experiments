@@ -41,6 +41,13 @@ set(FREERTOS_CONFIG_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/Config/Inc
 )
 
+add_library(FreeRTOS_interface INTERFACE)
+target_include_directories(FreeRTOS_interface INTERFACE
+    ${FREERTOS_INCLUDE_DIRS}
+    ${FREERTOS_CONFIG_INCLUDE_DIR}
+)
+
+
 # Create FreeRTOS library as an OBJECT library
 add_library(FreeRTOS OBJECT
     ${FREERTOS_CORE_SOURCES}
@@ -57,4 +64,7 @@ target_include_directories(FreeRTOS PUBLIC
 
 # Link with stm32cubemx interface library to get HAL and CMSIS includes/defines
 # For OBJECT libraries in CMake 3.12+, this propagates INTERFACE properties
-target_link_libraries(FreeRTOS PUBLIC stm32cubemx)
+target_link_libraries(FreeRTOS PUBLIC 
+    stm32cubemx
+    SystemView_interface
+)

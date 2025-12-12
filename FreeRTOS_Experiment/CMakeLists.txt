@@ -34,13 +34,11 @@ enable_language(C ASM)
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME})
 
-# Add FreeRTOS library
-message("Building FreeRTOS")
 add_subdirectory(Middleware/Third-Party/FreeRTOS)
-# Add STM32CubeMX generated sources
+add_subdirectory(Middleware/Third-Party/RTT)
+add_subdirectory(Middleware/Third-Party/SystemView)
+
 add_subdirectory(cmake/stm32cubemx)
-
-
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -69,6 +67,8 @@ list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
+    RTT
+    SystemView
     FreeRTOS
     # Add user defined libraries
 )

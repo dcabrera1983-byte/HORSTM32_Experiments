@@ -6,12 +6,15 @@
 #include "../../Middleware/Third-Party/FreeRTOS/Source/include/task.h"
 #include "portmacro.h"
 #include "stm32f7xx_hal_gpio.h"
+#include "SEGGER_SYSVIEW.h"
 
 void TaskLoop1(void *arguments);
 void TaskLoop2(void *arguments);
 
 
 void APP_main_init(){
+
+    SEGGER_SYSVIEW_Conf();
     
     xTaskCreate(TaskLoop1, "Task 1", 128, NULL, 5, NULL);
     xTaskCreate(TaskLoop2, "Task 2", 128, NULL, 5, NULL);
@@ -21,6 +24,11 @@ void APP_main_init(){
 
 
 void TaskLoop1(void *arguments){
+
+    while( SEGGER_SYSVIEW_IsStarted() == 0){
+        HAL_Delay(10);
+    }
+    SEGGER_SYSVIEW_PrintfHost("TASK1: Starting!\n");
 
     while(1){
         HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
